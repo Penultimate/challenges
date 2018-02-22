@@ -53,7 +53,7 @@
     var url = document.location + '';
     var param = url.split("param=")[1];
     param = preventXSS(decodeURIComponent(param));
-    if (param !== 'undefined') {
+    if (param !== 'undefined' && param !== "") {
       location.href = param;
     }
   </script>
