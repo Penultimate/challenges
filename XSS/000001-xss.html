@@ -45,14 +45,14 @@
            .replace(/>/g, "&gt;")
            .replace(/"/g, "&quot;")
            .replace(/%/g, "ribbit")
-           .replace(/alert/g, "frog")
-           .replace(/confirm/g, "frog")
-           .replace(/prompt/g, "frog")
-           .replace(/javascript/g, "frog");
+           .replace(/alert/gi, "frog")
+           .replace(/confirm/gi, "frog")
+           .replace(/prompt/gi, "frog")
+           .replace(/JAVASCRIPT/g, "frog");
     }
     var url = document.location + '';
     var param = url.split("param=")[1];
-    param = preventXSS(decodeURIComponent(param));
+    param = preventXSS(decodeURIComponent(param.toUpperCase()));
     if (param !== 'undefined' && param !== "") {
       location.href = param;
     }
