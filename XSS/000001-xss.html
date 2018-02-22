@@ -11,8 +11,13 @@
 <body>
   <nav><img src="https://penultimate.io/logo.png" alt=""></nav>
   <section>
-    <h1>Simple XSS challenge by Penultimate - #0</h1>
+    <h1>Simple XSS challenge by Penultimate - #1</h1>
     <p>Can you pop an alert on this page? Submit your solution to us on Twitter via a direct message: <a href="https://twitter.com/penultimateio">https://twitter.com/penultimateio</a>.</p>
+    <hr>
+      <h5>Rules</h5>
+      <ul>
+        <li>The payload must work in modern browsers.</li>
+      </ul>
     <hr>
     <h5>About penulimate.io</h5>
     <p>
@@ -31,13 +36,24 @@
     </p>
   </section>
   <script>
-    var site = "https://penultimate.github.io";
-    var redirect = document.location + '';
-    redirect = redirect.split("redirect=")[1];
-    redirect = decodeURIComponent(redirect);
-    if (redirect.indexOf(site) > -1 && redirect.split("://")[1].split("/")[0] === site.split("://")[1].split("/")[0]) {
-      location.href = redirect;
+    function preventXSS(unsafe) {
+      // Super secure XSS filter
+      //            - Larry Lau
+      return unsafe
+           .replace(/&/g, "&amp;")
+           .replace(/</g, "&lt;")
+           .replace(/>/g, "&gt;")
+           .replace(/"/g, "&quot;")
+           .replace(/'/g, "&#039;")
+           .replace("alert(", "frog(")
+           .replace("confirm(", "frog(")
+           .replace("prompt(", "frog(")
+           .replace("javascript", "frog");
     }
+    var url = document.location + '';
+    var param = url.split("param=")[1];
+    param = preventXSS(decodeURIComponent(param.toLowerCase()));
+    location.href = param;
   </script>
 </body>
 </html>
