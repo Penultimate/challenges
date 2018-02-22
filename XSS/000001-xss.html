@@ -48,12 +48,12 @@
            .replace(/alert/gi, "frog")
            .replace(/confirm/gi, "frog")
            .replace(/prompt/gi, "frog")
-           .replace(/JAVASCRIPT/g, "frog");
+           .replace(/javascript/gi, "frog");
     }
     var url = document.location + '';
     var param = url.split("param=")[1];
-    param = preventXSS(decodeURIComponent(param.toUpperCase()));
-    if (param !== 'undefined' && param !== "") {
+    param = preventXSS(decodeURIComponent(param)).toUpperCase();
+    if (param !== 'UNDEFINED' && param !== "") {
       location.href = param;
     }
   </script>
