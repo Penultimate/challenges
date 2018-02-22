@@ -17,7 +17,6 @@
       <h5>Rules</h5>
       <ul>
         <li>The payload must work in modern browsers.</li>
-        <li></li>
       </ul>
     <hr>
     <h5>About penulimate.io</h5>
@@ -54,7 +53,9 @@
     var url = document.location + '';
     var param = url.split("param=")[1];
     param = preventXSS(decodeURIComponent(param));
-    location.href = param;
+    if (param !== 'undefined') {
+      location.href = param;
+    }
   </script>
 </body>
 </html>
